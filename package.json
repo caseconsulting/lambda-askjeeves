@@ -1,0 +1,17 @@
+{
+  "name": "lambda-askjeeves",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Returns GIF based on given search term",
+  "repository": "https://github.com/caseconsulting/lambda-askjeeves",
+  "author": "Case Consulting",
+  "scripts": {
+    "build": "sam build -t template.yaml",
+    "deploy": "npm run build && sam deploy --template-file template.yaml --region us-east-1 --capabilities CAPABILITY_IAM --s3-prefix lambda-askjeeves --s3-bucket case-consulting-sam-deployments --stack-name lambda-askjeeves",
+    "local": "npm run build && sam local invoke AskJeevesFunction"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.715.0",
+    "axios": "^0.19.2"
+  }
+}
