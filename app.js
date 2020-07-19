@@ -28,9 +28,8 @@ exports.handler = async (event, context) => {
 
     // NOTE: This silly hack is here primarily for when a developer uses the npm run local command.
     //       Why would a developer want to type in stringified JSON as a test event in test/event.json?
-    console.log(typeof(event.body));
     let eventObj = (typeof(event.body) == 'string') ? JSON.parse(event.body) : event.body;
-    console.log(eventObj);
+
     let queryText = eventObj.command;
     return queryKendra(queryText).then(function (response) {
         console.log('Kendra response: ');

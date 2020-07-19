@@ -1,4 +1,5 @@
 #!/usr/bin/node
+'use strict';
 
 const readline = require('readline');
 const axios = require('axios');
@@ -15,6 +16,7 @@ function consolePrompt () {
 
         let axiosOptions = {
             method: 'POST',
+            // url: 'https://mi6i1noyah.execute-api.us-east-1.amazonaws.com/Prod/',
             url: 'http://localhost:3001/2015-03-31/functions/AskJeevesFunction/invocations',
             headers: {
                 'Content-Type': 'application/json'
@@ -60,4 +62,7 @@ function consolePrompt () {
 console.log('This script simulates a private-message chat with the chatbot implemented in app.js');
 console.log('On Basecamp, if you are not in a private message with the chatbot, you would need to prefix');
 console.log('any command with !jeeves\n')
+
+console.log('Press Ctrl+C to exit.\n');
+
 consolePrompt();
