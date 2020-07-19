@@ -2,7 +2,23 @@
 
 const AWS = require('aws-sdk');
 AWS.config.update({ region: 'us-east-1' });
+const kendra = new AWS.Kendra({ apiVersion: '2019-02-03', logger: console });
 
+/**
+ * 
+ * @param {*} query 
+ */
+function queryKendra(query) {
+    console.log(`-- [queryKendra] Query: ${query}`)
+
+    return kendra.query({ IndexId: '051eaa9b-bc05-438f-b599-6bcccb9d7404', QueryText: query }).promise();
+}
+
+/**
+ * Method which handles the lambda event and context.
+ * @param {*} event 
+ * @param {*} context 
+ */
 exports.handler = async (event, context) => {
     console.log('-------------------- NEW INVOCATION --------------------');
     console.log("Event:");
@@ -10,5 +26,22 @@ exports.handler = async (event, context) => {
     console.log("Context:");
     console.log(context);
 
-    return "Hello!";
+    // NOTE: This silly hack is here primarily for when a developer uses the npm run local command.
+    //       Why would a developer want to type in stringified JSON as a test event in test/event.json?
+    console.log(typeof(event.body));
+    let eventObj = (typeof(event.body) == 'string') ? JSON.parse(event.body) : event.body;
+    console.log(eventObj);
+    let queryText = eventObj.command;
+    return queryKendra(queryText).then(function (response) {
+        console.log('Kendra response: ');
+        console.log(JSON.stringify(response));
+
+        return JSON.stringify(response, null, 4);
+    },
+    function (error) {
+        console.log('Kendra error:');
+        console.log(error);
+
+        return error;
+    });
 };

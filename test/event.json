@@ -1,0 +1,8 @@
+{
+    "body": {
+        "command": "Who is the FSA administrator?",
+        "creator": {
+            "company": { "id": 1 }
+        }
+    }
+}

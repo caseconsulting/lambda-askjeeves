@@ -8,7 +8,8 @@
   "scripts": {
     "build": "sam build -t template.yaml",
     "deploy": "npm run build && sam deploy --template-file template.yaml --region us-east-1 --capabilities CAPABILITY_IAM --s3-prefix lambda-askjeeves --s3-bucket case-consulting-sam-deployments --stack-name lambda-askjeeves",
-    "local": "npm run build && sam local invoke AskJeevesFunction"
+    "local": "npm run build && sam local invoke AskJeevesFunction -e test/event.json",
+    "docker-local": "docker-compose up --force-recreate sam_app"
   },
   "dependencies": {
     "aws-sdk": "^2.715.0",

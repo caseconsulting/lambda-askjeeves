@@ -1,5 +1,7 @@
 # lambda-askjeeves
-Experimental Basecamp chatbot for answering questions from Case's benefits documents
+Experimental Basecamp chatbot for answering questions from Case's benefits documents.
+
+This project uses AWS Kendra to index items in the `documents` folder. 
 
 # Development Dependencies
 
@@ -26,11 +28,21 @@ npm install
 
 At this point, the necessary dependencies for development are installed. 
 
+# Additional setup steps
+
+We will need to have your AWS credentials added to your current user, so you will need to have [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html) installed. 
+
+```
+aws configure
+```
+
+Use your credentials from `cat ~/.aws/credentials` from your AWS WorkSpace.
+
 # Running the project locally
 
 **NOTE**: Unfortunately, we cannot run this project locally within AWS WorkSpaces. If you choose to use AWS workspaces as your primary development location, you will need to deploy the project each time you want to test new code. 
 
-Open two separate tabs in your favorite Terminal application. 
+Open two separate tabs in your Terminal application. 
 
 **Server**:  To run the lambda function via `sam-cli`, run the following in tab #1: 
 ```
