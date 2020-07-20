@@ -44,8 +44,10 @@ exports.handler = async (event, context) => {
           if (response.ResultItems[result].Type == 'ANSWER') {
             return response.ResultItems[result].AdditionalAttributes[0].Value.TextWithHighlightsValue.Text;
           }
+        } else {
+          return response.ResultItems[0].DocumentExcerpt.Text;
         }
-        return 'No answer only documents and i hate documents'
+        return 'I don\'t know how to handle questions and answers yet'
         //return response.ResultItems[0].DocumentExcerpt.Text;
     },
     function (error) {
