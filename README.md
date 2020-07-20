@@ -44,14 +44,14 @@ Use your credentials from `cat ~/.aws/credentials` from your AWS WorkSpace.
 
 Open two separate tabs in your Terminal application. 
 
-**Server**:  To run the lambda function via `sam-cli`, run the following in tab #1: 
+**Server**:  To run the lambda function via `sam-cli` within Docker, run the following in tab #1: 
 ```
-docker-compose up --force-recreate sam_app
+npm run docker-local
 ```
 
 **Client**: To ask the locally-running chatbot questions without going to Basecamp, run the following in tab #2: 
 ```
-./bin/console.js
+node bin/console.js
 ```
 
 # Deployment to AWS Lambda
