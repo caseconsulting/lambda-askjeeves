@@ -51,7 +51,7 @@ npm run docker-local
 
 **Client**: To ask the locally-running chatbot questions without going to Basecamp, run the following in tab #2: 
 ```
-./bin/console.js
+node bin/console.js
 ```
 
 # Deployment to AWS Lambda
