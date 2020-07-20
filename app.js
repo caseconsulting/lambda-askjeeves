@@ -11,7 +11,7 @@ const kendra = new AWS.Kendra({ apiVersion: '2019-02-03', logger: console });
 function queryKendra(query) {
     console.log(`-- [queryKendra] Query: ${query}`)
 
-    return kendra.query({ IndexId: '051eaa9b-bc05-438f-b599-6bcccb9d7404', QueryText: query }).promise();
+    return kendra.query({ IndexId: '981f0af7-a189-4dc6-813e-3152f10c078f', QueryText: query }).promise();
 }
 
 /**
