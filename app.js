@@ -40,13 +40,14 @@ exports.handler = async (event, context) => {
         // You will eventually want to remove the following JSON.stringify(response, null, 4) altogether and replace it with a string
         // wih HTML formatting.
         for (let result in response.ResultItems) {
-          console.log(result + '++++++');
           if (response.ResultItems[result].Type == 'ANSWER') {
             return response.ResultItems[result].AdditionalAttributes[0].Value.TextWithHighlightsValue.Text;
           }
         }
-        if (response.ResultItems[0].Type == 'DOCUMENT') {
-          return response.ResultItems[0].DocumentExcerpt.Text;
+        for (let result in response.ResultItems) {
+          if (response.ResultItems[result].Type == 'DOCUMENT') {
+            return response.ResultItems[result].DocumentTitle.Text + ': ' + response.ResultItems[result].DocumentExcerpt.Text;
+          }
         }
         return 'I don\t know how to handle questions and answers yet'
         //return response.ResultItems[0].DocumentExcerpt.Text;
