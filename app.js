@@ -5,7 +5,7 @@ AWS.config.update({ region: 'us-east-1' });
 const kendra = new AWS.Kendra({ apiVersion: '2019-02-03', logger: console });
 
 /**
- * 
+ * Send any text query to AWS Kendra
  * @param {*} query 
  */
 function queryKendra(query) {
@@ -33,7 +33,7 @@ exports.handler = async (event, context) => {
     let queryText = eventObj.command;
     return queryKendra(queryText).then(function (response) {
         console.log('Kendra response: ');
-        console.log(JSON.stringify(response));
+        console.log(JSON.stringify(response, null, 4));
 
         return JSON.stringify(response, null, 4);
     },
