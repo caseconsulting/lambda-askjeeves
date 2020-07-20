@@ -44,10 +44,11 @@ exports.handler = async (event, context) => {
           if (response.ResultItems[result].Type == 'ANSWER') {
             return response.ResultItems[result].AdditionalAttributes[0].Value.TextWithHighlightsValue.Text;
           }
-        } else {
+        }
+        if (response.ResultItems[0].Type == 'DOCUMENT') {
           return response.ResultItems[0].DocumentExcerpt.Text;
         }
-        return 'I don\'t know how to handle questions and answers yet'
+        return 'I don\t know how to handle questions and answers yet'
         //return response.ResultItems[0].DocumentExcerpt.Text;
     },
     function (error) {
