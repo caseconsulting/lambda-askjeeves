@@ -35,6 +35,11 @@ exports.handler = async (event, context) => {
         console.log('Kendra response: ');
         console.log(JSON.stringify(response, null, 4));
 
+        // Edit this! Format it nicely for a chat bot response. 
+        // Basecamp will process HTML formatting for headings and things of that nature, so you can include those in your responses. 
+        // You will eventually want to remove the following JSON.stringify(response, null, 4) altogether and replace it with a string
+        // with HTML formatting. 
+
         return JSON.stringify(response, null, 4);
     },
     function (error) {
