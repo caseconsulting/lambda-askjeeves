@@ -6,7 +6,7 @@ const kendra = new AWS.Kendra({ apiVersion: '2019-02-03', logger: console });
 
 /**
  * Send any text query to AWS Kendra
- * @param {*} query 
+ * @param {*} query
  */
 function queryKendra(query) {
     console.log(`-- [queryKendra] Query: ${query}`)
@@ -16,8 +16,8 @@ function queryKendra(query) {
 
 /**
  * Method which handles the lambda event and context.
- * @param {*} event 
- * @param {*} context 
+ * @param {*} event
+ * @param {*} context
  */
 exports.handler = async (event, context) => {
     console.log('-------------------- NEW INVOCATION --------------------');
@@ -35,12 +35,18 @@ exports.handler = async (event, context) => {
         console.log('Kendra response: ');
         console.log(JSON.stringify(response, null, 4));
 
-        // Edit this! Format it nicely for a chat bot response. 
-        // Basecamp will process HTML formatting for headings and things of that nature, so you can include those in your responses. 
+        // Edit this! Format it nicely for a chat bot response.
+        // Basecamp will process HTML formatting for headings and things of that nature, so you can include those in your responses.
         // You will eventually want to remove the following JSON.stringify(response, null, 4) altogether and replace it with a string
-        // with HTML formatting. 
-
-        return JSON.stringify(response, null, 4);
+        // wih HTML formatting.
+        for (let result in response.ResultItems) {
+          console.log(result + '++++++');
+          if (response.ResultItems[result].Type == 'ANSWER') {
+            return response.ResultItems[result].AdditionalAttributes[0].Value.TextWithHighlightsValue.Text;
+          }
+        }
+        return 'No answer only documents and i hate documents'
+        //return response.ResultItems[0].DocumentExcerpt.Text;
     },
     function (error) {
         console.log('Kendra error:');
